@@ -19,7 +19,7 @@ def get_image_from_label(label):
 
 
 def main():
-    model_name = sys.argv[1]
+    model_name = input()
     if model_name not in ['svm', 'logistic', 'knn']:
         print("Invalid model-name '{}'!".format(model_name))
         return
@@ -43,7 +43,7 @@ def main():
             frame = apply_image_transformation(frame)
             frame_flattened = frame.flatten()
             classifier_model = joblib.load(model_serialized_path)
-            predicted_labels = classifier_model.predict(frame_flattened)
+            predicted_labels = classifier_model.predict(frame_flattened.reshape(1, -1))
             predicted_label = predicted_labels[0]
             print("Predicted label = {}".format(predicted_label))
             predicted_image = get_image_from_label(predicted_label)
@@ -57,7 +57,7 @@ def main():
         cv2.waitKey(2000)
         cv2.destroyAllWindows()
     cv2.destroyAllWindows()
-    print "The program completed successfully !!"
+    print ("The program completed successfully !!")
 
 
 if __name__ == '__main__':

@@ -10,7 +10,7 @@ from common.image_transformation import apply_image_transformation
 
 
 def main():
-    model_name = sys.argv[1]
+    model_name = input()
     if model_name not in ['svm', 'logistic', 'knn']:
         print("Invalid model-name '{}'!".format(model_name))
         return
@@ -32,7 +32,7 @@ def main():
                 frame = apply_image_transformation(frame)
                 frame_flattened = frame.flatten()
                 classifier_model = joblib.load(model_serialized_path)
-                predicted_labels = classifier_model.predict(frame_flattened)
+                predicted_labels = classifier_model.predict(frame_flattened.reshape(1, -1))
                 predicted_label = predicted_labels[0]
                 print("Predicted label = {}".format(predicted_label))
 
@@ -45,7 +45,7 @@ def main():
                     image_path, exception_traceback))
                 continue
     cv2.destroyAllWindows()
-    print "The program completed successfully !!"
+    print ("The program completed successfully !!")
 
 
 if __name__ == '__main__':

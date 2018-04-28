@@ -18,7 +18,7 @@ def capture_images(camera, num_images, num_seconds_to_wait, output_dir_path):
     :param output_dir_path: The path of the directory in which to save all the captured images.
     :returns: None
     """
-    for num_image in xrange(1, num_images + 1):
+    for num_image in range(1, num_images + 1):
         print("\n\nTaking image #{}...".format(num_image))
         ret, frame = camera.read()
         if not ret:
@@ -49,17 +49,17 @@ def main():
     camera = cv2.VideoCapture(0)
 
     num_images = 5
-    num_seconds_to_wait = 1
+    num_seconds_to_wait = 5
     generated_data_dir_path = get_config('generated_data_dir_path')
     camera_captures_path = os.path.join(
         generated_data_dir_path, "camera_captures")
     capture_images(camera, num_images, num_seconds_to_wait,
                    camera_captures_path)
 
-    print "\n\nReleasing the camera..."
+    print ("\n\nReleasing the camera...")
     camera.release()
     cv2.destroyAllWindows()
-    print "The program completed successfully !!"
+    print ("The program completed successfully !!")
 
 
 if __name__ == '__main__':

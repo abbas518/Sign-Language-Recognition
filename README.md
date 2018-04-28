@@ -1,3 +1,5 @@
+-----This is an edited version from  Anmol-Singh-Jaggi's repositort that works with the latest version of both the dependencis by this date "20 april 2018"-----
+
 # Sign Language Recognition
 
 Recognize [American Sign Language (ASL)](https://en.wikipedia.org/wiki/American_Sign_Language) using Machine Learning.  

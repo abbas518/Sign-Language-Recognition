@@ -76,7 +76,7 @@ def divide_data_train_test(images, labels, ratio):
 
 
 def main():
-    model_name = sys.argv[1]
+    model_name=input()
     if model_name not in ['svm', 'logistic', 'knn']:
         print("Invalid model-name '{}'!".format(model_name))
         return

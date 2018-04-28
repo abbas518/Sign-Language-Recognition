@@ -63,16 +63,18 @@ def make_skin_white(frame):
     # Highlight the main object
     frame = cv2.GaussianBlur(frame, (5, 5), 0)
 
-    threshold = 1
-    for i in xrange(height):
-        for j in xrange(width):
+    
+    
+    threshold = 1    
+    for i in range(height):
+        for j in range(width):
             if frame[i][j] > threshold:
                 # Setting the skin tone to be white.
                 frame[i][j] = 255
             else:
                 # Setting everything else to be black.
                 frame[i][j] = 0
-
+ 
     print("Done!")
     return frame
 
@@ -118,8 +120,10 @@ def draw_contours(frame):
     print("Drawing contour around white color...")
 
     # 'contours' is a list of contours found.
-    contours, _ = cv2.findContours(
-        frame, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    #contours, _ = cv2.findContours(
+     #   frame, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    frame, contours, _ = cv2.findContours(
+       frame, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)   
 
     # Finding the contour with the greatest area.
     largest_contour_index = find_largest_contour_index(contours)
@@ -145,12 +149,12 @@ def centre_frame(frame, contour_dimensions):
     contour_perimeter_x, contour_perimeter_y, contour_perimeter_width, contour_perimeter_height = contour_dimensions
     square_side = max(contour_perimeter_x, contour_perimeter_height) - 1
     height_half = (contour_perimeter_y + contour_perimeter_y +
-                   contour_perimeter_height) / 2
+                   contour_perimeter_height) // 2
     width_half = (contour_perimeter_x + contour_perimeter_x +
-                  contour_perimeter_width) / 2
+                  contour_perimeter_width) // 2
     height_min, height_max = height_half - \
-        square_side / 2, height_half + square_side / 2
-    width_min, width_max = width_half - square_side / 2, width_half + square_side / 2
+        square_side // 2, height_half + square_side // 2
+    width_min, width_max = width_half - square_side // 2, width_half + square_side // 2
 
     if (height_min >= 0 and height_min < height_max and width_min >= 0 and width_min < width_max):
         frame = frame[height_min:height_max, width_min:width_max]
